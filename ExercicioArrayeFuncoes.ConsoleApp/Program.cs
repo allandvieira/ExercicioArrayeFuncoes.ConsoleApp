@@ -4,159 +4,141 @@
     {
         static void Main(string[] args)
         {
-            int[] numerosArray = new int[10] { -5, 3, 4, 5, 9, 6, 10, -2, 11, 1 };
+            //declarando e atribuindo valores pro array
+            int[] numerosArray = new int[10] {-5, 3, 4, 5, 9, 6, 10, -2, 11, 1};
 
-            Console.WriteLine($"O maior número da Sequência utilizando o método MAX() é: {numerosArray.Max()}");
-            Console.WriteLine($"O maior número da Sequência utilizando o método manual é: {RetornaMaiorNumeroArray(numerosArray)}");
-            Console.WriteLine();
-            Console.WriteLine($"O maior número da Sequência utilizando o método MIN() é: {numerosArray.Min()}");
-            Console.WriteLine($"O maior número da Sequência utilizando o método manual é: {RetornaMenorNumeroArray(numerosArray)}");
-            Console.WriteLine();
-            Console.WriteLine($"A media dos número da Sequência utilizando o método MIN() é: {numerosArray.Average()}");
-            Console.WriteLine($"A media dos número da Sequência utilizando o método manual é: {RetornaMediaArray(numerosArray)}");
+            ExibirValores(numerosArray);
+            RetornarMaiorNumeroArray(numerosArray);
+            RetornarMenorNumeroArray(numerosArray);
+            RetornarMediaArray(numerosArray);
+            RetornarTresMaioresValoresArray(numerosArray);
+            RetornarValoresNegativosDoArray(numerosArray);
+            RemoverItemDoArray(numerosArray, 7);
 
-            Console.ReadLine();
-
-        }
-
-        public static int RetornaMaiorNumeroArray(int[] numeros)
-        {
-            int maiorNumero = 0;
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                if (numeros[i] > maiorNumero)
-                {
-                    maiorNumero = numeros[i];
-                }
-            }
-
-            return maiorNumero;
-        }
-
-        public static int RetornaMenorNumeroArray(int[] numeros)
-        {
-            int menorNumero = numeros[0];
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                if (numeros[i] < menorNumero)
-                {
-                    menorNumero = numeros[i];
-                }
-            }
-
-            return menorNumero;
-        }
-
-        public static float RetornaMediaArray(int[] numeros)
-        {
-            int count = 0;
-            float media = 0;
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                count += numeros[i];
-            }
-
-            media = (float) count / numeros.Length;
-            return media;
-        }
-
-        static void TresMaiores(int[] numeros, int tamanhodovetor)
-        {
-            int maiornum = numeros[0];
-            for (int i = 0; i < tamanhodovetor; i++)
-            {
-
-                if (numeros[i] > maiornum)
-                {
-                    maiornum = numeros[i];
-                }
-            }
-
-            int aux = maiornum;
-            int count = 0;
-            Console.Write($"\nOs tres maiores numeros são: ");
-            while (true)
-            {
-                for (int i = 0; i < tamanhodovetor; i++)
-                {
-                    if (numeros[i] == aux)
-                    {
-                        //maiornum = num[i];
-                        Console.Write($"{numeros[i]}  ");
-                        aux--;
-                        count++;
-                    }
-                }
-                if (count == 3)
-                {
-                    break;
-                }
-            }
             Console.ReadLine();
         }
 
-        static void NumerosNegativos(int[] numeros, int tamanhodovetor)
+        private static void ExibirValores(int[] numerosArray)
         {
-            Console.Write($"\nOs numeros negativos são: ");
-            for (int i = 0; i < tamanhodovetor; i++)
-            {
-                if (numeros[i] < 0)
-                {
-                    Console.Write($"{numeros[i]}  ");
-                }
-            }
-            Console.ReadLine();
+            // Forma manual
+            //for (int = 0; i < numerosArray.Length; i++)
+            //{
+            //    Console.Write(numerosArray[i] + " ");
+            //}
+
+            Console.WriteLine($"A sequência de números do Array é: [{string.Join(", ", numerosArray)}]");
         }
 
-        static void Sequencia(int[] numeros, int tamanhodovetor)
+        private static void RetornarMaiorNumeroArray(int[] numerosArray)
         {
-            Console.Write($"\nOs numeros desta sequencia são: ");
-            for (int i = 0; i < tamanhodovetor; i++)
-            {
-                Console.Write($"{numeros[i]}  ");
-            }
-            Console.ReadLine();
-        }
+            int maiorNumero = int.MinValue;
 
-        static int Apagar(int tamanhodovetor, int[] numeros)
-        {
-            //Imprimindo os numeros da sequencia novamente
-            Console.Write($"\nOs numeros desta sequencia são: ");
-            for (int i = 0; i < tamanhodovetor; i++)
+            for (int i = 0; i < numerosArray.Length; i++)
             {
-                Console.Write($"{numeros[i]}  ");
-            }
+                int valorAtual = numerosArray[i];
 
-            Console.Write($"\n\nQual numero deseja apagar? ");
-            int aux2 = Convert.ToInt32(Console.ReadLine());
-            int aux3;
-            for (int i = 0; i < tamanhodovetor; i++)
-            {
-                if (numeros[i] == aux2)
+                if (valorAtual > maiorNumero)
                 {
-                    aux3 = i;
-                    int aux4 = i + 1;
-                    for (int j = aux4; j < tamanhodovetor; j++)
-                    {
-                        numeros[aux3] = numeros[j];
-                        aux3++;
-                    }
-                    i--;
+                    maiorNumero = valorAtual;
                 }
             }
-            tamanhodovetor--;
 
-            //Imprimindo os numeros da sequencia novamente
-            Console.Write($"\nOs numeros desta sequencia agora são: ");
-            for (int i = 0; i < tamanhodovetor; i++)
+            Console.WriteLine("\nO maior valor do Array é: " + maiorNumero);
+        }
+
+        private static void RetornarMenorNumeroArray(int[] numerosArray)
+        {
+            int menorNumero = int.MaxValue;
+
+            for (int i = 0; i < numerosArray.Length; i++)
             {
-                Console.Write($"{numeros[i]}  ");
+                int valorAtual = numerosArray[i];
+
+                if (valorAtual < menorNumero)
+                {
+                    menorNumero = valorAtual;
+                }
             }
-            Console.ReadLine();
-            return tamanhodovetor;
+
+            Console.WriteLine("\nO menor valor do Array é: " + menorNumero);
+        }
+
+        private static void RetornarMediaArray(int[] numerosArray)
+        {
+            decimal soma = 0;
+
+            for (int i = 0; i < numerosArray.Length; i++)
+            {
+                int valorAtual = numerosArray[i];
+                soma += valorAtual;
+            }
+
+            decimal media = soma / numerosArray.Length;
+
+            Console.WriteLine("\nO valor médio do Array é: " +  media);
+        }
+
+        private static void RetornarTresMaioresValoresArray(int[] numerosArray)
+        {
+            int[] copia = new int[numerosArray.Length];
+
+            Array.Copy(numerosArray, copia, numerosArray.Length);
+
+            Array.Sort(copia);
+
+            Array.Reverse(copia);
+
+            Console.WriteLine($"\nOs 3 maiores valores do Array são: [{copia[0]}, {copia[1]}, {copia[2]}]");
+        }
+
+        private static void RetornarValoresNegativosDoArray(int[] numerosArray)
+        {
+            int countNumerosNegativos = 0;
+
+            for (int i = 0; i < numerosArray.Length; i++)
+            {
+                int valorAtual = numerosArray[i];
+
+                if (valorAtual < 0)
+                    countNumerosNegativos++;
+            }
+
+            int[] numerosNegativos = new int[countNumerosNegativos];
+
+            int indiceNumerosNegativos = 0;
+
+            for (int i = 0; i < numerosArray.Length; i++)
+            {
+                int valorAtual = numerosArray[i];
+
+                if (valorAtual < 0)
+                {
+                    numerosNegativos[indiceNumerosNegativos] = valorAtual;
+                    indiceNumerosNegativos++;
+                }
+
+            }
+
+            Console.WriteLine($"\nOs numeros negativos do Array são: [{string.Join(", ", numerosNegativos)}]");
+        }
+
+        private static void RemoverItemDoArray(int[] numerosArray, int posicaoParaRemover)
+        {
+            int[] novoArray = new int[numerosArray.Length - 1];
+
+            int countItens = 0;
+
+            for (int i = 0; i < numerosArray.Length; i++)
+            {
+                int valorAtual = numerosArray[i];
+                if (i != posicaoParaRemover)
+                {
+                    novoArray[countItens] = numerosArray[i];
+                    countItens++;
+                }
+            }
+
+            Console.WriteLine($"\nA sequência do Array após remover um número é: [{string.Join(", ", novoArray)}]");
         }
     }
 }
